@@ -46,25 +46,24 @@ lang: pt
 ###### 1.1 Constantes, Variáveis e Tipos de Dados
 
 **Variáveis e constantes** são os elementos básicos que um programa manipula.
-
 **Constante** é um determinado valor fixo que não se modifica durante a execução de um programa.
 
 Uma **variável** é um **espaço reservado na memória** do computador para armazenar um **tipo de dado** determinado. O conteúdo de uma variável pode ser alterado ao longo do tempo durante a execução de um programa, podendo assumir diferentes valores, mas só  armazenando um valor a cada instante.
 
 ---
 
-![bg left height:80% width:90%](./assets/variavel_caixa.jpg)
+![bg left height:80% width:85%](./assets/variavel_caixa.jpg)
 
 ###### 1.1 Constantes, Variáveis e Tipos de Dados (2)
 
-Partindo de uma analogia, uma ***variável*** *pode ser considerada como uma caixa*, onde o ***tipo de dado*** que pode ser armazenado na variável *é o tamanho da caixa*.
+<br>Partindo de uma analogia, uma ***variável*** *pode ser considerada como uma caixa*, onde o ***tipo de dado*** que pode ser armazenado na variável *é o tamanho da caixa*.
 
 ---
 
 ##### 1.2 Operadores
 
 Os operadores são meios pelo qual incrementamos, decrementamos, comparamos e avaliamos dados dentro do computador. Temos três tipos de operadores:
-
+<br>
 • Operadores Aritméticos (+ - * / %)
 • Operadores Relacionais (< > <= >= == !=)
 • Operadores Lógicos (&& || !)
@@ -117,6 +116,7 @@ Os operadores são meios pelo qual incrementamos, decrementamos, comparamos e av
 #### 1.4.4 Etapas
 
 A maioria dos Algoritmos é composto de três etapas:
+<br>
 
 - Inicialização (Entrada)
 - Execução (Processamento)
@@ -128,7 +128,7 @@ A maioria dos Algoritmos é composto de três etapas:
 
 ##### 1.4.5 Exemplo de Algoritmo
 
-$C = (5 * (F - 32)) / 9$
+<br>$C = (5 * (F - 32)) / 9$
 
 - Entrada: ler a temperatura em Celsius
 - Processamento: calcular a temperatura em Farenheit
@@ -138,7 +138,7 @@ $C = (5 * (F - 32)) / 9$
 
 Os algoritmos também podem ser descritos em uma linguagem chamada **pseudocódigo**. Este nome é uma alusão à posterior implementação em uma linguagem de programação, ou seja, os algoritmos são "independentes" das linguagens de programação. Ao contrário de uma linguagem de programação, não existe um formalismo rígido de como deve ser escrito o pseudocódigo, deve apenas ser fácil de interpretar. Para isso utilizaremos algumas técnicas:
 
-- Usar somente um verbo por frase; Imaginar que você está desenvolvendo um algoritmo para pessoas comuns; Usar frases curtas e simples; Ser objetivo; Procurar usar palavras que não tenham sentido dúbio
+- Usar somente um verbo por frase; Imaginar que você está desenvolvendo um algoritmo para pessoas comuns; Usar frases curtas e simples; Ser objetivo; Procurar usar palavras que não tenham sentido dúbio. **Portugol**
 
 ---
 
@@ -251,7 +251,11 @@ Linguagens podem também não ser nem baixo nem alto nível, como C++ e Rust (ou
 
 ##### 3.1 Classificando Linguagens de Programação (2)
 
+<br>
+
 ###### 3.1.2 Compilada vs Interpretada
+
+<br>
 
 - Linguagens Compiladas (C, Rust)
 - Linguagens Interpretadas (Python, Javascript)
@@ -317,10 +321,18 @@ As linguagens interpretadas são mais fáceis de se portar de um sistema para ou
 
 ---
 
-#### 4. Instalação do Rust/Scrypto
+##### 4. Conhecendo as Ferramentas
+
+Um programador precisa, no mínimo, um **editor de texto** e de um **compilador** (ou interpretador) da linguagem escolhida, instalado sobre o sistema operacional. Além disso, vai precisar de todas as **dependências** (bibliotecas) para o seu programa. É recomendado o uso de uma **IDE** (Ambiente Integrado de Desenvolvimento), pois aumenta consideravelmente a produtividade e o aprendizado. É recomendado também o uso de sistemas de versionamento como **git**.
+
+**Vamos colocar a mão na massa?**
+
+---
+
+###### 4.1 Instalação do Rust/Scrypto
 
 Windows
-1. Instale o [VS Code Comunidade]()
+1. Instale o [Virtual Studio 2022 Comunidade]() - o uso do VS Code é recomendado.
 1. Baixe o [rust-init.exe]()
 
 ---

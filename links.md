@@ -8,14 +8,13 @@
 
 ## Scrtpto
 
-[Radix Academy](https://academy.radixdlt.com)
-
+[Radix Academy](https://academy.radixdlt.com)<br>
 [Instalação da Toolchain Scrypto](https://docs.radixdlt.com/docs/getting-rust-scrypto)
 
 ## Genérico
 
-[Alura - L[ogica de programação]](https://www.alura.com.br/artigos/algoritmos-e-logica-de-programacao)
-[Alura - Linguagens de Programação](https://www.alura.com.br/artigos/linguagem-programacao)
-[Alura POO](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)
+[Alura - L[ogica de programação]](https://www.alura.com.br/artigos/algoritmos-e-logica-de-programacao)<br>
+[Alura - Linguagens de Programação](https://www.alura.com.br/artigos/linguagem-programacao)<br>
+[Alura POO](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)<br>
 [Alura Compiladores](https://www.alura.com.br/artigos/o-que-e-compilacao)
 [Apresentações com Markdown](https://marp.app/#get-started)
