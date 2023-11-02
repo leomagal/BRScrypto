@@ -7,6 +7,8 @@ math: mathjax
 lang: pt
 ---
 
+<!--footer: {{pageNumber}}-->
+
 <!-- markdownlint-disable MD033 -->
 
 <style>
@@ -197,16 +199,36 @@ A primeira coisa que a CPU faz é procurar na BIOS as instruções iniciais para
 
 ---
 
+##### 2.4.1 Web 1
+
+- sites estáticos (HTML, CSS).
+- Programação com [CGI](https://pt.wikipedia.org/wiki/CGI) para os primeiros sites dinâmicos. Interatividade limitada.
+
+##### 2.4.2 Web2
+
+- Javascript trouxe mais interatividade aos sites dinâmicos e programabilidade ao fornt-end.
+- Virtualização, containerização, IAC e CI/CD, clusters e micro-serviços. Escalabilidade horizontal com load-balancers.
+
+---
+
 ![bg left height:5in](./assets/FE_Dapp.jpg)
 
-##### 2.3 Estrutura de um Dapp Radix Front-end puro
+##### 2.4.3 Web3
+
+  > A Web3 adiciona uma camada trustless de propriedade digital e uma máquina virtual distribuída capaz de dar capacidades de programabilidade para esta propriedade digital.
+
+---
+
+![bg left height:5in](./assets/FE_Dapp.jpg)
+
+##### 2.5 Estrutura de um Dapp Radix Front-end puro
 
 - O usuário interage com o Dapp através do Front-End (browser). o Dapp gera os manifestos das transações que o usuário assina na carteira.
 - O back-end é o próprio Dapp que roda direto no Radix Engine (máquina virtual)
 
 ---
 
-##### 2.4 Dapp Radix Full Stack
+##### 2.6 Dapp Radix Full Stack
 
 ![bg left width:90% height:80%](./assets/FS_Dapp.jpg)
 
@@ -216,7 +238,7 @@ Backend centralizado tem duas novas funções:
 
 ---
 
-##### 2.4 Dapp Radix Full Stack (2)
+##### 2.6 Dapp Radix Full Stack (2)
 
 ![bg left width:90% height:80%](./assets/FS_Dapp.jpg)
 
