@@ -353,9 +353,25 @@ Um programador precisa, no mínimo, um **editor de texto** e de um **compilador*
 
 ###### 4.1 Instalação do Rust/Scrypto
 
-Windows
-1. Instale o [Virtual Studio 2022 Comunidade]() - o uso do VS Code é recomendado.
-1. Baixe o [rust-init.exe]()
+Rust (Windows)
+
+1. Instale o [VS Code](https://code.visualstudio.com/download) - o uso do VS Code é recomendado.
+1. Instale o [rust-init.exe (64 bits)](https://win.rustup.rs/x86_64). Neste momento está pronto para seguir o livro.
+
+---
+
+Scrypto (Windows)
+
+1. Instale o [LLVM](https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.1/LLVM-13.0.1-win64.exe)
+1. Instale o [git](https://gitforwindows.org/).
+1. Abra um console novo e digite: `rustup target add wasm32-unknown-unknown`
+1. Instale s simulador:
+
+```cmd
+git clone https://github.com/radixdlt/radixdlt-scrypto.git
+cd radixdlt-scrypto
+cargo install --path ./simulator
+```
 
 ---
 
