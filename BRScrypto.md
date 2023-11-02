@@ -85,37 +85,7 @@ Os operadores são meios pelo qual incrementamos, decrementamos, comparamos e av
 
 ---
 
-##### Fluxograma
-
-![height:100%](./assets/fluxograma.jpg)
-
----
-
-![bg left height:80%](./assets/Algoritmo_Sequencia.jpg)
-
-##### 1.4.1 Sequência
-
-- Esta estrutura é composta por uma sequência enfileirada de instruções, que são executadas uma após a outra.
-
----
-![bg left height:5in width:5in](./assets/Algoritmo_Decisao.jpg)
-
-#### 1.4.2 Decisão
-
-- Estruturas de decisão são utilizadas para realizar um controle e um desvio no fluxo das instruções do programa, ou seja, algumas ações somente serão realizadas se uma determinada condição for atendida.
-
----
-
-![bg left height:5in width:5in](./assets/Algoritmo_Loop.jpg)
-
-#### 1.4.3 Iteração
-
-- Estruturas de iteração (repetição ou laço) são utilizadas para realizar uma mesma instrução diversas vezes.
-- A repetição pode ocorrer um número pré-estabelecido de vezes ou quando uma condição for satisfeita.
-
----
-
-#### 1.4.4 Etapas
+#### 1.4.1 Etapas
 
 A maioria dos Algoritmos é composto de três etapas:
 <br>
@@ -126,11 +96,41 @@ A maioria dos Algoritmos é composto de três etapas:
 
 ---
 
+##### Fluxograma
+
+![height:100%](./assets/fluxograma.jpg)
+
+---
+
+![bg left height:80%](./assets/Algoritmo_Sequencia.jpg)
+
+##### 1.4.2 Sequência
+
+- Esta estrutura é composta por uma sequência enfileirada de instruções, que são executadas uma após a outra.
+
+---
+![bg left height:5in width:5in](./assets/Algoritmo_Decisao.jpg)
+
+#### 1.4.3 Decisão
+
+- Estruturas de decisão são utilizadas para realizar um controle e um desvio no fluxo das instruções do programa, ou seja, algumas ações somente serão realizadas se uma determinada condição for atendida.
+
+---
+
+![bg left height:5in width:5in](./assets/Algoritmo_Loop.jpg)
+
+#### 1.4.4 Iteração
+
+- Estruturas de iteração (repetição ou laço) são utilizadas para realizar uma mesma instrução diversas vezes.
+- A repetição pode ocorrer um número pré-estabelecido de vezes ou quando uma condição for satisfeita.
+
+---
+
 ![bg left height:80%](./assets/Algoritmo_Celsius_Farenheit.jpg)
 
 ##### 1.4.5 Exemplo de Algoritmo
 
-<br>$C = (5 * (F - 32)) / 9$
+$F = (9 * C) / 5 + 32$
 
 - Entrada: ler a temperatura em Celsius
 - Processamento: calcular a temperatura em Farenheit
@@ -351,14 +351,20 @@ Um programador precisa, no mínimo, um **editor de texto** e de um **compilador*
 
 ---
 
-###### 4.1 Instalação do Rust/Scrypto
+###### 4.1 Playground
 
-Rust (Windows)
+[Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021)
+
+###### 4.2 Instalação do Rust + IDE
+
+Windows
 
 1. Instale o [VS Code](https://code.visualstudio.com/download) - o uso do VS Code é recomendado.
-1. Instale o [rust-init.exe (64 bits)](https://win.rustup.rs/x86_64). Neste momento está pronto para seguir o livro.
+1. Instale o Rust (rustc  / cargo) [rust-init.exe (64 bits)](https://win.rustup.rs/x86_64). Neste momento está pronto para seguir o livro.
 
 ---
+
+###### 4.3 Instalação do Scrypto
 
 Scrypto (Windows)
 
@@ -375,19 +381,22 @@ cargo install --path ./simulator
 
 ---
 
-#### 5. Conceitos da Linguagem Rust
+##### 5. Conceitos da Linguagem Rust
 
-##### - Declarações (*statements*)
+<br>
+<br>
 
-##### - Expressões (*expressions*)
+###### - Declarações (*statements*)
 
-##### - Escopo
+###### - Expressões (*expressions*)
 
-##### - Controle de fluxo
+###### - Escopo
 
-##### - Tipos de dados
+###### - Controle de fluxo
 
-##### - Características (*traits*)
+###### - Tipos de dados
+
+###### - Características (*traits*)
 
 ---
 
@@ -399,8 +408,6 @@ fn main(){
 }
 ```
 
-- Escopo {}
-
 - Declaração de função
 
 ```Rust
@@ -408,31 +415,36 @@ fn nome_da_funcao() { expressao }
 ```
 
 - Função “main”
-
-- Macro "println!"
-
-- Rust Playground / rustc  / cargo
+- Escopo {}
 
 ---
 
-# Comentários no código
+- Macro "println!"
 
-### Comentário de uma linha
+##### Comentários no código
+
+###### Comentário de uma linha
+
 ```Rust
 // Isto é um comentário de uma linha
 ```
-### Comentários em várias linhas
+
+###### Comentários em várias linhas
+
 ```Rust
 /* Isso funciona mas 
 Não é muito comum */
 ```
-### Documentando funcionalidade
+
+###### Documentando funcionalidade
+
 ```Rust
 /// Isso é mais usado para documentar funcionalidade
 ```
 
-------
-# Documentação de libs pelos comentários
+---
+
+###### Documentação de libs pelos comentários
 
 ```Rust
 //! Isto é usado principalmente para documentar crates (bibliotecas)
@@ -443,33 +455,47 @@ Não é muito comum */
 //! fn main() {...}
 //! ```
 ```
-https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md
 
-------
-# Macro *println!* 
+[https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md]
 
-### - Formatando impressão:
+---
+
+##### Macro *println!*
+
+###### - Formatando impressão
+
 ```Rust
 println!("Meu nome é {} e eu tenho {}", "Leo", 29);
 ```
-### - Expressão:
+
+###### - Expressão
+
 ```Rust
 println!("a + b = {}", 3+6);
 ```
-### - Posicional:
+
+###### - Posicional
+
 ```Rust
 println!("{0} tem um {2} e {0} tem um {1}", "Leo", "gato", "cachorro");
 ```
-### - Alias (apelido):
+
+---
+
+###### - Alias (apelido)
+
 ```Rust
 println!("{nome} {sobrenome}", sobrenome="Magal", nome="Leo");
 ```
-### - Características de impressão:
+
+###### - Características de impressão
+
 ```Rust
 println!("binary: {:b}, Hex: {:x}, Octal: {:o}", 5, 5, 5);
 ```
-### - Característica Debug:
+
+###### - Característica Debug
+
 ```Rust
 println!("Array {:?}", [1, 2, 3]);
 ```
-
