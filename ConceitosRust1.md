@@ -408,7 +408,7 @@ if logical_expression {
    //functionality for false
 }
 ```
-### - if else if
+##### - if else if
 ```Rust
 if expression1 {
    //functionality for expression1 true
@@ -418,7 +418,7 @@ if expression1 {
    //functionality for both expressions false
 }
 ```
-### - if com retorno
+##### - if com retorno
 ```Rust
 let res = if expr1 {
    1 //result for true = 1
@@ -488,4 +488,4 @@ match expression {
 #### Permitido o uso de ranges
 
 ----
-# Funções
+### Funções
