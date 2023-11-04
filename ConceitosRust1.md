@@ -36,13 +36,19 @@ cargo install --path ./simulator
 
 ---
 # Conceitos da Linguagem
+- Declarações
+- Expressões
+- Escopos
+- Comentários
+- E/S
+- Variáveis e mutabilidade
+- Tipo de dados
+- Operadores
+- Controle de Fluxo
+- Funções
+- 
 
-### - Declarações (*statements*).
-### - Expressões (*expressions*).
-### - Escopo.
-
-
-------
+-----
 #### Hello World
 
 ```Rust
@@ -50,50 +56,51 @@ fn main(){
     println!("Hello World!");
 }
 ```
-
 #### - Declaração de função:
 ```Rust
 fn nome_da_funcao() { expressao }
 ```
-#### - Função “main”.
-#### - Escopo {}.
-#### - Macro println!
 
 ------
 ### Macro *println!* 
 
 #### - Formatando impressão:
 ```Rust
-println!("Meu nome é {} e eu tenho {}", "Leo", 29);
+fn main() {
+    println!("Meu nome é {} e eu tenho {}", "Leo", 29);   
+}
 ```
 #### - Expressão:
 ```Rust
-println!("a + b = {}", 3+6);
+fn main() {
+    println!("a + b = {}", 3+6);    
+}
 ```
 #### - Posicional:
 ```Rust
-println!("{0} tem um {2} e {0} tem um {1}", "Leo", "gato", "cachorro");
+fn main() {
+    println!("{0} tem um {2} e {0} tem um {1}", "Leo", "gato", "cachorro");
+}
 ```
 #### - Alias (apelido):
 ```Rust
-println!("{nome} {sobrenome}", sobrenome="Magal", nome="Leo");
+fn main() {
+    println!("{nome} {sobrenome}", sobrenome="Magal", nome="Leo");
+}
 ```
-#### - Características de impressão:
+#### - Traits de impressão:
 ```Rust
-println!("binary: {:b}, Hex: {:x}, Octal: {:o}", 5, 5, 5);
+fn main() {
+    println!("binary: {:b}, Hex: {:x}, Octal: {:o}", 5, 5, 5);    
+}
 ```
-#### - Característica Debug:
+#### - Trait Debug:
 ```Rust
-println!("Array {:?}", [1, 2, 3]);
+main() {
+    println!("Array {:?}", [1, 2, 3]);    
+}
 ```
-
 ------
-# Conceitos da Linguagem
-
-### - Comentários.
-### - Variáveis.
-### - Tipos de dados.
-
 ### Comentários no código
 
 #### Comentário de uma linha
@@ -129,59 +136,81 @@ https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-c
 
 #### - Declarando usando *let*
 ```Rust
-let nome;
+fn main() {
+    let nome;    
+}
 ```
 #### - Declaração com anotação de tipo
 ```Rust
-let idade:i32;
+fn main() {
+    let idade:i32;   
+}
 ```
 #### - Declaração e atribuição
 ```Rust
-let nome = "Leo";
-let idade = 32;
+fn main() {
+    let nome = "Leo";
+    let idade = 32;    
+}
 ```
 #### - Rust é uma linguagem de tipagem forte, mas infere o tipo caso não seja declarado explicitamente.
 ```Rust
-let amount:i64 = 8473926758472;
-let amount = 8473926758472;  // error
+fn main() {
+    let amount:i64 = 8473926758472;
+    let amount = 8473926758472;  // error    
+}
 ```
-#### - Nomes podem conter letras, números e _
-#### - Tem que começar com uma letra ou um _
-#### - Seguem a convenção snake_case
+#### - Nomes de váriáveis: 
+- Podem conter letras, números e _
+- Tem que começar com uma letra ou um _
+- Seguem a convenção snake_case
 #### - Imutáveis por padrão:
 ```Rust
-let idade = 34;
-idade = 35;			// error
+fn main() {
+    let idade = 34;
+    idade = 35;			// error    
+}
 ```
 #### - Declarando mutabilidade de variáveis:
 ```Rust
-let mut idade = 34;
-idade = 35;			// ok
+fn main() {
+    let mut idade = 34;
+    idade = 35;			// ok    
+}
 ```
 #### - *Shadowing*:
 ```Rust
-let x = 5;
-let x = x + 1;
+fn main() {
+    let x = 5;
+    let x = x + 1;
 
-{
-    let x = x * 2;
-    println!("O valor de x no escopo interno é: {}", x);
+    {
+        let x = x * 2;
+        println!("O valor de x no escopo interno é: {}", x);
+    }
+    println!("O valor de x é: {}", x);    
 }
 
-println!("O valor de x é: {}", x);
 ```
 ####    - Diferença entre *shadowing* e mutabilidade:
 ```Rust
 // este código compila
-let spaces = "   ";
-let spaces = spaces.len(); // ok
+fn main() {
+    let spaces = "   ";
+    let spaces = spaces.len(); // ok    
+}
 // este código não compila
-let mut spaces = "   ";
-spaces = spaces.len(); // erro
+fn main() { 
+    let mut spaces = "   ";
+    spaces = spaces.len(); // erro 
+}
 ```
 ####    - Declarando várias variáveis simultaneamente:
 ```Rust
-let (a, b, c) = (2, 3, 4);
+fn main() {
+    let (a, b, c) = (2, 3, 4);
+    println!("a = {}, b = {}, c = {}", a, b, c);    
+}
 ```
 
 
@@ -189,8 +218,10 @@ let (a, b, c) = (2, 3, 4);
 ### Tipos de dados
 #### - Rust é *estaticamente tipada*, o que significa que o compilador tem que saber todos os tipos na compilagem
 ```Rust
-let number = "42".parse().expect("Not a number!"); // erro
-let number: u32 = "42".parse().expect("Not a number!"); // ok
+fn main() {
+    let number = "42".parse().expect("Not a number!"); // erro
+    let number: u32 = "42".parse().expect("Not a number!"); // ok    
+}
 ``` 
 #### - Tipos escalares:
 Um tipo escalar representa um valor, número inteiro, número ponto flutuante, booleano ou caracter. 
@@ -218,9 +249,11 @@ Um tipo escalar representa um valor, número inteiro, número ponto flutuante, b
 
 #### - Ponto Flutuante:
 ```Rust
-let x = 2.0; // f64
-let y: f32 = 3.0; // f32
-let z: f32 = 2; // mismatched types error
+fn main() {
+    let x = 2.0; // f64
+    let y: f32 = 3.0; // f32
+    let z: f32 = 2; // mismatched types error    
+}
 ```
 
 #### - Booleano:
@@ -300,12 +333,6 @@ fn main() {
 }
 ```
 -----
-# Conceitos da Linguagem
-
-### - Operadores
-### - Strings
-
------
 ### Operadores
 #### Aritméticos
 ######   Operações numéricas estão implantadas em todos os tipos numéricos primitivos:
@@ -344,9 +371,39 @@ fn main() {
 |!|NOT|!true = false|
 
 #### Bitwise Operators (&, |, ^, !, <<, >>)
-
-
 ----
+### Escopo e posse de variáveis
+#### Escopo
+###### {} define um bloco de código. 
+```Rust
+fn main() {
+    let x = 5;
+    let y = {
+        let x = 3; // este x só existe dentro
+        x + 1 // este x será destruído
+    };
+    println!("O valor de y é: {}", y);
+    println!("O valor de x é: {}", x); // x será destruído
+}
+```
+
+###### Um bloco é uma ou mais expressões que retornam um valor.
+```Rust
+fn main() {
+    // let resposta = 42;
+    let resposta = { 42 }; // isto é equivalente
+    println!("A resposta é {}", resposta);
+    let tres_ao_quadrado = {
+        let y = 3;
+        y * y // repare na ausência da ; no final da última expressão => retorno
+    };
+    println!("Três ao quadrado é {}", tres_ao_quadrado);
+    let nulo = {};
+    println!("O sentido da vida é {:?}", nulo)
+}
+```
+
+---
 ### Strings
 
 #### - Dois tipos:
@@ -382,52 +439,100 @@ println!("meu gato se chama {}", gato) // meu gato se chama Luke Jaguatirica
 - chars
 
 ----
+### Posse de Variáveis
+#### Heap vs Pilha
+- Tipos primitivos tem tamanho conhecido em tempo de compilação, são armazenados na pilha e implementam o trait `Copy` (cópia rasa). 
+- Tipos com tamanho desconhecido em tempo de compilação implementam o trait `Clone` ("cópia profunda"), logo não podem ser implicitamente copiados.
+- Quando uma função recebe uma variável passada por valor, ela toma posse dessa variável, que é destruída ao fim do seu escopo (logo não podem ser referenciadas novamente).
+```Rust
+fn print_num(n: i32) {
+    println!("{} number", n);
+}
+
+fn print_string(s: String) {
+    println!("string: {}", s);
+}
+
+fn print_str(s: &str) {
+    println!("str: {}", s);
+}
+
+fn main() {
+    let n: i32 = 42;
+    print_num(n); // `n` é copiado
+    print_num(n); // ok
+    let s = "Magal";
+    print_str(s); // s é copiado
+    print_str(s); // ok
+    let s = String::from("Magal");
+    let s2 = s.clone(); // s é clonado para s2
+    print_string(s); // s é movido
+    // print_string(s); //isso não compila
+    print_string(s2); // ok
+}
+```
+
+---
 ### Constantes
 ##### Valores não podem ser alterados
-```Rust
-const URL: &str = "google.com";
-```
 ##### Caixa alta por convenção
 ##### Anotação de tipo é mandatória
 ##### Shadowing é proibido
 ##### Podem ter escopo local ou global
+###### Variáveis globais (global scope)
+```Rust
+const PI: f32 = 3.141592; // constantes declaradas fora de qualquer função
+//acessíceis dentro de qualquer escopo do projeto
 
+fn main() {
+    println!("O valor de PI é: {}", PI); 
+}
+
+fn perimetro(raio: f32) -> f32 {
+    PI * 2.0 * raio 
+}
+
+fn area(raio: f32) -> f32 {
+    PI * raio * raio
+}
+
+```
 ----
 ### Controle de fluxo
 ##### - if
 ```Rust
-if logical_expression {
-   //functionality for true
+if expressao_logica {
+   // funcionalidade esperada para true
 }
 ```
 ##### - if else
 ```Rust
-if logical_expression {
-   //functionality for true
+if expressao_logica {
+   //funcionalidade esperada para true
 } else {
-   //functionality for false
+   //funcionalidade esperada para flase
 }
 ```
 ##### - if else if
 ```Rust
-if expression1 {
-   //functionality for expression1 true
-} else if expression2 {
-   //functionality for expression1 false and expression2 true
+if expressao1 {
+   //funcionalidade esperada para expressao1 true
+} else if expressao2 {
+   //funcionalidade esperada para expressao1 true and expressao2 true
 } else {
-   //functionality for both expressions false
+   //funcionalidade esperada para ambas falsas
 }
 ```
 ##### - if com retorno
 ```Rust
 let res = if expr1 {
-   1 //result for true = 1
+   1 //result true = 1
 } else {
-   2 //result for false = 2
+   2 //result false = 2
 }
 ```
 ### - Loop for
-####    Faz um loop em uma collection ou range, executando a funcionalidade para cada elemento.
+####    Faz um loop em uma coleção, executando a funcionalidade para cada elemento.
 ```Rust
 for element in collection {
    functionality
@@ -442,17 +547,17 @@ fn main() {
         println!("{0} * {0} = {1}", i, i * i);
     }
 
-    let pets = ["cat", "dog", "chihuahua", "bear", "hamster"];
+    let pets = ["cat", "dog", "chihuahua", "onça", "hamster"];
     for pet in pets.iter() {
         if pet == &"chihuahua" {
-            println!("{} barks too much", pet);
+            println!("{} late muito", pet);
             continue
         }
-        if pet == &"bear" {
-            println!("{} is not a pet", pet);
+        if pet == &"onça" {
+            println!("{} não é um pet", pet);
             break
         }
-        println!("I love my {}", pet);
+        println!("Eu ❤️ meu {}", pet);
     }
 
     for (pos, i) in (1..11).enumerate() {
@@ -489,3 +594,129 @@ match expression {
 
 ----
 ### Funções
+#### - Declaração de função:
+```Rust
+fn nome_da_funcao(parametro: tipo) -> tipo { expressao }
+```
+#### - Passada por valor
+```Rust
+#[allow(unused_mut)]
+fn main() {
+    let mut manoel = String::from("Manoel");
+    modifica_in_place(manoel);
+    // println!("string: {}", manoel); // não compila
+    let manoel = String::from("Manoel");
+    let manoel = nao_modifica_mas_retorna(manoel);
+    println!("string: {}", manoel); // ok
+}
+
+fn modifica_in_place(mut s: String) { 
+    s.push_str(" e Joaquim");
+    println!("string: {}", s);
+}
+
+fn nao_modifica_mas_retorna (s: String) -> String {
+    let mut ss = s.clone(); // clona
+    ss.push_str(" e Joaquim"); // modifica in place
+    ss // retorna
+}
+```
+#### - Passada por referencia
+```Rust
+fn main() {
+    let manoel = String::from("Manoel");
+    let a = primeira_letra(&manoel);
+    println!("a primeira letra de {} é: {}", manoel, a);
+}
+
+fn primeira_letra(s: &String) -> char {
+    s.chars().next().unwrap()
+}
+```
+### Referências (ponteiros) e Empréstimo (borrowing)
+- Referenciar em Rust é emprestar, pois a função não toma posse da variável e não pode *dropar* o que não possui.
+- São imutáveis por padrão, mutabilidade tem que ser explícita.
+```Rust
+fn main() {
+    let mut s = String::from("texto");
+
+    modifica(&mut s);
+}
+
+fn modifica(uma_string: &mut String) {
+    uma_string.push_str(" longo");
+}
+```
+- Podem ser dereferenciados com o operador `*` (não recomendado)
+```Rust
+#[allow(unused_mut)]
+fn main() {
+    let mut nome: &str = "Magal";
+    diga_ola(&mut nome);
+    println!("{}", nome);
+}
+fn diga_ola(s: &mut &str) {
+    println!("Olá {}", *s);
+    if *s == "Magal" { *s = "Leo";}
+}
+```
+- Em um dado momento, vc pode ter um ou outro, mas não os dois:
+    - uma referência mutavel
+    - um número ilimitado de referências imutáveis.
+```Rust
+let mut s = String::from("texto");
+
+let r1 = &mut s;
+let r2 = &mut s;
+-------------
+error[E0499]: cannot borrow `s` as mutable more than once at a time
+ --> main.rs:5:19
+  |
+4 |     let r1 = &mut s;
+  |                   - first mutable borrow occurs here
+5 |     let r2 = &mut s;
+  |                   ^ second mutable borrow occurs here
+6 | }
+  | - first borrow ends here
+```
+```Rust
+let mut s = String::from("texto");
+
+let r1 = &s; // sem problema
+let r2 = &s; // sem problema
+let r3 = &mut s; // PROBLEMA GRANDE
+-------------
+error[E0502]: cannot borrow `s` as mutable because it is also borrowed as
+immutable
+ --> main.rs:6:19
+  |
+4 |     let r1 = &s; // sem problema
+  |               - immutable borrow occurs here
+5 |     let r2 = &s; // sem problema
+6 |     let r3 = &mut s; // PROBLEMA GRANDE
+  |                   ^ mutable borrow occurs here
+7 | }
+  | - immutable borrow ends here
+```
+- Referências tem que ser sempre válidas.
+```Rust
+fn main() {
+    let referencia_para_o_nada = soltar();
+}
+
+fn soltar() -> &String {
+    let s = String::from("texto");
+
+    &s
+}
+-------------
+error[E0106]: missing lifetime specifier
+ --> main.rs:5:16
+  |
+5 | fn soltar() -> &String {
+  |                ^ expected lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but there is
+  no value for it to be borrowed from
+  = help: consider giving it a 'static lifetime
+```
