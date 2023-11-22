@@ -287,7 +287,7 @@ let quinhentos = x.0;
 let seis_ponto_quatro = x.1;
 let um = x.2;
 ```
-#### - Array:
+#### - Array (estática):
 ```Rust
 let a = [1, 2, 3, 4, 5];
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -730,3 +730,288 @@ fn main() {
     // error: `x` does not live long enough
 }
 ```
+---
+### Struct
+
+Tipo de dado complexo capaz de encapsular campos nomeados com de diferentes tipos, além de métodos e funções associadas:
+```Rust
+struct Pessoa {
+    nome: String,
+    idade: u8
+}
+
+#[allow(unused_mut)]
+fn main() {
+  let mut fulano = Pessoa {
+      nome: String::from("Fulano"),
+      idade: 29
+  };
+
+  println!("{} tem {} anos", fulano.nome, fulano.idade);
+}
+```
+
+Abreviatura da inicialização dos campos quando as variáveis têm o mesmo nome dos campos:
+```Rust
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,  // email: email,
+        username, //username: username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+```
+
+Criação de instâncias de outras instâncias com Sintaxe de Atualização
+da Struct (Struct Update Syntax):
+
+```Rust
+#![allow(unused)]
+fn main() {
+    struct User {
+        username: String,
+        email: String,
+        sign_in_count: u64,
+        active: bool,
+    }
+
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    let user2 = User {
+        email: String::from("another@example.com"),
+        username: String::from("anotherusername567"),
+        ..user1
+    };
+}
+```
+
+Estruturas sem campos nomeados (*Tuple Struct*)
+```Rust
+#![allow(unused)]
+fn main() {
+    struct Cor(i32, i32, i32);
+    struct Ponto(i32, i32, i32);
+
+    let preto = Cor(0, 0, 0);
+    let origem = Ponto(0, 0, 0);
+}
+``` 
+
+Estruturas não tem o *trait Display* implementado por padrão, é necessário derivar do *trait Debug*:
+```Rust
+#[derive(Debug)]
+struct Retangulo {
+    comprimento: u32,
+    largura: u32,
+}
+
+fn main() {
+    let rect1 = Retangulo { comprimento: 50, largura: 30 };
+
+    println!("rect1 é {:?}", rect1);
+}
+```
+
+Definindo métodos:
+```Rust
+struct Retangulo {
+    comprimento: u32,
+    largura: u32,
+}
+
+impl Retangulo {
+    fn area(&self) -> u32 {
+        self.comprimento * self.largura
+    }
+}
+```
+Outro recurso útil dos blocos impl é que podemos definir funções dentro dos blocos impl que não recebem self como um parâmetro. Estas são chamadas de funções associadas porque elas estão associados com a struct. Elas ainda são funções, não métodos, porque elas não têm uma instância da struct para trabalhar. Você já usou a função associada String::from.
+
+Funções associadas são usados frequentemente para construtores que retornam uma nova instância da struct.
+```Rust
+impl Rectangle {
+    fn square(size: u32) -> Rectangle {
+        Rectangle { length: size, width: size }
+    }
+}
+```
+
+---
+### Enums
+
+Enums permitem definir um tipo por meio da enumeração de seus possíveis tipos/valores, determinados variantes:
+```Rust
+enum Network {
+    Olympia,
+    Babylon
+}
+
+fn main() {
+    let network = Network::Babylon;
+    match network {
+        Network::Olympia => println!("Olympia"),
+        Network::Babylon => println!("Babylon"),
+    }
+}
+```
+
+Enums também podem ter dados associados às suas variantes e métodos definidos em blocos `impl`:
+```Rust
+#![allow(unused)]
+enum Mensagem {
+    Sair,
+    Mover { x: i32, y: i32 },
+    Escrever(String),
+    MudarCor(i32, i32, i32),
+}
+
+impl Mensagem {
+    fn invocar(&self) {
+        match self {
+            Mensagem::Escrever(mensagem) => {
+                println!("{}", mensagem)
+            },
+            _ => {}
+        }
+    }
+}
+
+fn main() {
+    let m = Mensagem::Escrever(String::from("olá"));
+    m.invocar();
+}
+```
+---
+#### Option<T>
+Enum `Option<T>` é uma enum definida pela biblioteca padrão. O tipo Option é muito utilizado, pois engloba um cenário muito comum, em que um valor pode ser algo ou pode não ser nada, já que Rust não tem o valor nulo (null).
+```Rust
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
+A enum `Option<T>` é tão útil que ela já vem inclusa no prelúdio: você não precisa trazê-la explicitamente para o seu escopo. Além disso, o mesmo ocorre com suas variantes: você pode usar `Some` e `None` diretamente sem prefixá-las com `Option::`. `Option<T>` continua sendo uma enum como qualquer outra, e `Some(T)` e `None` ainda são variantes do tipo `Option<T>`.
+
+A sintaxe do `<T>`` é um parâmetro de tipo genérico. Por ora, tudo que você precisa saber é que `<T>` significa que a variante `Some` da enum `Option` pode conter um dado de qualquer tipo.
+
+##### Controle de fluxo com if let
+
+Digamos que eu tenha uma variavel que armazena algum valor inteiro:<br>
+```Rust
+let algum_valor_u8 = Some(0u8);
+```
+
+O bloco de código a seguir execvuta algo apenas se o valor é igual a três:
+```Rust
+match algum_valor_u8 {
+    Some(3) => println!("O valor é 3"),
+    _ => (),
+}
+```
+
+E este bloco é absolutamente equivalente ao anterior porém mais conciso:
+```Rust
+if let Some(3) = algum_valor_u8 {
+    println!("O valor é 3");
+}
+```
+---
+#### Result<T, E>
+
+Outro enum incluso no prelúdio, muito útil no tratamento de erros. 
+```Rust
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        Err(ref error) if error.kind() == ErrorKind::NotFound => {
+            match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => {
+                    panic!(
+                        "Tentou criar um arquivo e houve um problema: {:?}",
+                        e
+                    )
+                },
+            }
+        },
+        Err(error) => {
+            panic!(
+                "Houve um problema ao abrir o arquivo: {:?}",
+                error
+            )
+        },
+    };
+}
+```
+A condição `if error.kind() == ErrorKind::NotFound` é chamada de um *match guard*: é uma condição extra dentro de uma linha de `match` que posteriormente refina o padrão da linha. Essa condição deve ser verdadeira para o código da linha ser executado; caso contrário a análise de padrões vai continuar considerando as próximas linhas no `match`. O `ref` no padrão é necessário para que o `error` não seja movido para a condição do guard, mas meramente referenciado por ele (no contexto de um padrão, `&` corresponde a uma referência e nos dá seu valor, enquanto `ref` corresponde a um valor e nos dá uma referência a ele).
+
+Embora o uso de padrões match com Result seja útil para erros recuperáveis, há atalhos para o panic:
+```Rust
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt").unwrap();
+}
+```
+
+ou:
+```Rust
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt").expect("Falhou ao abrir hello.txt");
+}
+```
+
+O uso do enum `Result` facilita a propagação de erros por funções:
+```Rust
+#![allow(unused)]
+use std::io;
+use std::io::Read;
+use std::fs::File;
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let f = File::open("hello.txt");
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
+}
+```
+
+O operador `?` pode ser usado como atalho, ao invés do `match`:
+```Rust
+#![allow(unused)]
+use std::io;
+use std::io::Read;
+use std::fs::File;
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut f = File::open("hello.txt")?;
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
+}
+```
+
+---
+### Coleções - Vetores
