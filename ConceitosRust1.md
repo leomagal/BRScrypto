@@ -791,6 +791,30 @@ fn main() {
 }
 ```
 
+
+Estruturas podem ser desestruturadas:
+```Rust
+struct Vec3 {
+    x: f32,
+    y: f32,
+    z: f32,
+}
+
+fn main() {
+    let mut point = Vec3 { 
+        x: 3.0f32,
+        y: 3.97f32,
+        z: 1.581f32,
+    };
+    let Vec3 { x, y, z } = &mut point; //x,y,z são referencias do tipo &f32
+    let x = *x + 1; // x aqui é dereferenciado para acessarmos seu valor
+    // só é possível porque a estrutura point é mutavel
+    dbg!(x, y, z);
+
+}
+```
+
+
 Estruturas sem campos nomeados (*Tuple Struct*)
 ```Rust
 #![allow(unused)]
@@ -1171,3 +1195,4 @@ Substituindo um valor baseado no antigo usando deref:
 
     println!("{:?}", map);
 ```
+----
