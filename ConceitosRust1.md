@@ -215,7 +215,7 @@ fn main() {
 
 
 -----
-### Tipos de dados
+### Tipos primitivos de dados
 #### - Rust é *estaticamente tipada*, o que significa que o compilador tem que saber todos os tipos na compilagem
 ```Rust
 fn main() {
@@ -531,7 +531,7 @@ let res = if expr1 {
    2 //result false = 2
 }
 ```
-### - Loop for
+### Loop for
 ####    Faz um loop em uma coleção, executando a funcionalidade para cada elemento.
 ```Rust
 for element in collection {
@@ -888,7 +888,8 @@ fn main() {
 }
 ```
 ---
-#### Option<T>
+#### Option\<T\>
+
 Enum `Option<T>` é uma enum definida pela biblioteca padrão. O tipo Option é muito utilizado, pois engloba um cenário muito comum, em que um valor pode ser algo ou pode não ser nada, já que Rust não tem o valor nulo (null).
 ```Rust
 enum Option<T> {
@@ -922,7 +923,7 @@ if let Some(3) = algum_valor_u8 {
 }
 ```
 ---
-#### Result<T, E>
+#### Result\<T, E\>
 
 Outro enum incluso no prelúdio, muito útil no tratamento de erros. 
 ```Rust
@@ -1014,4 +1015,159 @@ fn read_username_from_file() -> Result<String, io::Error> {
 ```
 
 ---
-### Coleções - Vetores
+### Coleções
+Coleções são variáveis que podem conter múltiplos valores. Diferente dos tipos embutidos array e tupla, os dados que essas coleções apontam estão guardados na heap, que significa que a quantidade de dados não precisa ser conhecida em tempo de compilação e pode aumentar ou diminuir conforme a execução do programa. Vetores, HasshMaps e Strings são exemplos de coleções.
+
+#### Vetores
+Criando um novo vetor:
+```Rust
+let v: Vec<i32> = Vec::new();
+let v = vec![1, 2, 3];
+```
+
+Modificando um vetor:
+```Rust
+let mut v = vec![1, 2, 3];
+v.push(4);
+```
+
+Lendo elementos do vetor:
+```Rust
+let v = vec![1, 2, 3, 4, 5];
+let terceiro: &i32 = &v[2];
+let terceiro: Option<&i32> = v.get(2);
+
+let nao_existe = &v[100]; // pânico
+let nao_existe = v.get(100);  // possibilidade de tratar o erro
+```
+
+Fatiando um vetor:
+```Rust
+let v = vec![1,2,3,4,5,6,7,8,9,10];
+let de_dois_a_cinco: &i32 = &v[1..5];
+let de_um_a_seis: &i32 = &v[..6];
+let de_um_a_seis_alternativa: &[i32] = &v[..5=];
+let de_dois_ao_ultimo: &[i32] = &v[1..];
+let emppresta_o_vetor_todo: &[i32] = &v[..];
+```
+
+Iterando Valores do Vetor:
+```Rust
+let v = vec![100, 32, 57];
+for i in &v {
+    println!("{}", i);
+}
+```
+
+#### Strings
+Strings são complexas e cada linguagem as implementa de forma diferente. Rust implementa strigs como coleções de caracteres UTF-8m, similar a um vetor, mas com algumas ressalvas. Ao contrário de tipos primitivos como i32, etc, o caractere utf-8 não tem um tamanho fixo (pode variar de um a quatro bytes). Além disso, alguns alfabetos tem caracteres que se fundem em outros. Por conta disso, **indexar strings em Rust é ilegal**. Rust obriga o programador a tomar decisões logo no início do processo de desenvolvimento em relação aos caracteres UTF-8, de forma a evitar erros futuros com os caracteres não ASCII. Feliemente, o tipo String tem já uma série de métodos para todo tipo de manipulação.
+
+Indexar strings é ilegal, mas fatiar strings é permitido:
+```Rust
+let mut s = String::from("hello world");
+// let h = &s[0]; Isto é ilegal, não compila
+let world = &s[6..11]; // ok
+``` 
+
+Mas pode gerar um panic:
+```Rust
+let s = String::from("Здравствуйте");
+let hello = &s[0..4];
+```
+```
+$ cargo run
+   Compiling collections v0.1.0 (file:///projects/collections)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.43s
+     Running `target/debug/collections`
+thread 'main' panicked at 'byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of `Здравствуйте`', src/main.rs:4:14
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+```
+
+Ao invés de indexar uma String, vc pode iterar seus caracteres e localizar os índices usando métodos de fatiamento:
+```Rust
+let s = String::from("hello");
+let third_character = s.chars().nth(1);
+assert_eq!(third_character, Some('e'));
+let s = "💖😍💖💖💖";
+let third_character = s.chars().nth(1);
+assert_eq!(third_character, Some('😍'));
+```
+
+Vc pode converter literais de string ou fatias em objetos String:
+```Rust
+let my_string = String::from("hello");
+let my_string_literal = "hello";
+let mystring = my_string_literal.to_string();
+let mystring = "hello".to_string();
+```
+
+Vc pode "somar" (concatenar) strings com operador +:
+```Rust
+let s1 = String::from("Hello, ");
+let s2 = String::from("world!");
+let s3 = format!("{s1}{s2}");
+let s4 = s1 + &s2; //s1 será movido e não poderá mais ser usado
+// println!("{s1"); não funcionaria aqui 
+println!("s2 = {s2}");
+println!("\"{s3}\" = \"{s4}\"");
+```
+
+Vale estudar os métodos `chars()` e `bytes()` como também dar uma olhada nos inúmeros métodos disponíveis para o tipo String:
+(Documentação completa do objeto String)[https://doc.rust-lang.org/beta/std/string/struct.String.html]
+
+#### HashMap<K,V>
+Hasmaps são pares chave/valor. Diferentes linguagens tem diferentes nomes para isso, como 'map', 'dictionary', 'hashtable', etc. Úteis quando vc precisa procurar itens baseado em uma chave, ao invés de um índice.
+Chaves tem o tipo genérico K e o valor o tipo genérico V. O HashMap usa um função de hashing para mapear de forma segura na memória as chaves e os valores. 
+
+Criando um HashMap e acessando seus itens:
+```Rust
+let mut pontuacao = HashMap::new();
+pontuacao.insert(String::from("Flamengo"), 50);
+pontuacao.insert(String::from("Santos"), 10);
+let time = String::from("Flamengo");
+let pontos_do_time = pontuacao.get(&time).copied().unwrap_or(0);
+```
+
+Sobre *Ownership* e HasMaps: para tipos primitivos, que implementam `Copy`, os valores são copiados, porém, para objetos como String, o valor será movido para dentro do HashMap:
+```Rust
+let chave = String::from("Flamengo");
+let valor = 50u8;
+println!("{chave}, {valor}");
+let mut pontuacao = HashMap::new();
+pontuacao.insert(chave, valor);
+// println!("{chave}, {valor}"); não funciona mais aqui
+```
+
+Iterando sobre um hashmap:
+```Rust
+for (key, value) in &pontuacao {
+    println!("{}: {}", key, value);
+}
+```
+
+Sobrescrevendo valores:
+```Rust
+pontuacao.insert(String::from("Flamengo"), 100);
+```
+
+Adicionando apenas se a chave for inexistente:
+```Rust
+pontuacao.entry(String::from("Flamengo")).or_insert(100);
+pontuacao.entry(String::from("Fluminense")).or_insert(0);
+```
+
+Substituindo um valor baseado no antigo usando deref:
+```Rust
+    use std::collections::HashMap;
+
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0); // count é um ponteiro 
+        *count += 1; // count aqui é dereferenciado p/ ter seu valor modificado
+    }
+
+    println!("{:?}", map);
+```
